@@ -34,7 +34,7 @@ RUN apt-get install -y libtool
 RUN apt-get install -y autoconf
 
 # Install x86_64 ghcup-0.1.20.0
-RUN wget -O ghcup https://downloads.haskell.org/~ghcup/0.1.19.2/x86_64-linux-ghcup-0.1.20.0
+RUN wget -O ghcup https://downloads.haskell.org/~ghcup/0.1.20.0/x86_64-linux-ghcup-0.1.20.0
 RUN chmod 500 ghcup
 RUN ./ghcup -v --downloader wget install ghc 9.6.3
 RUN ./ghcup set ghc 9.6.3
