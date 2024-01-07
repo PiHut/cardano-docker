@@ -91,6 +91,7 @@ WORKDIR /root
 # Image clean-up
 RUN rm -rf secp256k1
 RUN rm -rf libsodium
+RUN rm -rf blst
 RUN cabal clean
 RUN apt-get autoremove -y
 RUN apt-get clean
