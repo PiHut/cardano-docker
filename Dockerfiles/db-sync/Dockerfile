@@ -10,6 +10,7 @@ WORKDIR /root
 RUN apt-get update
 RUN apt-get install -y libghc-postgresql-libpq-dev
 RUN apt-get install -y libpq5
+RUN apt-get install -y libicu-dev
 RUN apt-get install -y postgresql postgresql-contrib
 
 # Download cardano-node repository
