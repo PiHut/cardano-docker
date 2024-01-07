@@ -33,13 +33,13 @@ RUN apt-get install -y libnuma-dev
 RUN apt-get install -y libtool
 RUN apt-get install -y autoconf
 
-# Install aarch64 ghcup-0.1.19.2
-RUN wget -O ghcup https://downloads.haskell.org/~ghcup/0.1.19.2/x86_64-linux-ghcup-0.1.19.2
+# Install x86_64 ghcup-0.1.20.0
+RUN wget -O ghcup https://downloads.haskell.org/~ghcup/0.1.19.2/x86_64-linux-ghcup-0.1.20.0
 RUN chmod 500 ghcup
-RUN ./ghcup -v --downloader wget install ghc 9.2.7
-RUN ./ghcup set ghc 9.2.7
+RUN ./ghcup -v --downloader wget install ghc 9.6.3
+RUN ./ghcup set ghc 9.6.3
 
-# Install aarch64 cabal 3.10.1.0
+# Install x86_64 cabal 3.10.1.0
 RUN ./ghcup -v --downloader wget install cabal 3.10.1.0
 
 # Install Bitcoin secp256k1 dependency
@@ -63,7 +63,7 @@ WORKDIR /root
 RUN git clone https://github.com/input-output-hk/libsodium
 
 WORKDIR /root/libsodium
-RUN git checkout a5baeccc5be38dda54dd85eba58fdd929b2b8387
+RUN git checkout dbb48cc
 RUN ./autogen.sh
 RUN ./configure
 RUN make
@@ -71,6 +71,18 @@ RUN make install
 
 ENV LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 ENV PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+WORKDIR /root
+
+# Install BLST dependencies
+RUN git clone https://github.com/supranational/blst
+WORKDIR /root/blst
+RUN git checkout v0.3.10
+RUN ./build.sh
+COPY files/libblst.pc /usr/local/lib/pkgconfig/libblst.pc
+RUN cp bindings/blst_aux.h bindings/blst.h bindings/blst.hpp /usr/local/include/
+RUN cp libblst.a /usr/local/lib
+RUN chmod u=rw,go=r /usr/local/lib/pkgconfig/libblst.pc /usr/local/include/blst_aux.h /usr/local/include/blst.h /usr/local/include/blst.hpp /usr/local/lib/
 
 WORKDIR /root
 
