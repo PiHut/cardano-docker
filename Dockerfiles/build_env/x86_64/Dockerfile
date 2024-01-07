@@ -19,6 +19,8 @@ RUN apt-get install -y libgmp-dev
 RUN apt-get install -y libssl-dev
 RUN apt-get install -y libtinfo-dev
 RUN apt-get install -y libsystemd-dev
+RUN apt-get install -y liblmdb-dev
+RUN apt-get install -y libsodium-dev
 RUN apt-get install -y zlib1g-dev
 RUN apt-get install -y llvm-9
 RUN apt-get install -y automake
