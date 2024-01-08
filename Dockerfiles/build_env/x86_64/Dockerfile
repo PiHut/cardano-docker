@@ -36,13 +36,15 @@ RUN apt-get install -y libtool
 RUN apt-get install -y autoconf
 
 # Install x86_64 ghcup-0.1.20.0
+ARG GHC_VERSION
+ARG CABAL_VERSION
 RUN wget -O ghcup https://downloads.haskell.org/~ghcup/0.1.20.0/x86_64-linux-ghcup-0.1.20.0
 RUN chmod 500 ghcup
-RUN ./ghcup -v --downloader wget install ghc 9.6.3
-RUN ./ghcup set ghc 9.6.3
+RUN ./ghcup -v --downloader wget install ghc ${GHC_VERSION}
+RUN ./ghcup set ghc ${GHC_VERSION}
 
-# Install x86_64 cabal 3.10.1.0
-RUN ./ghcup -v --downloader wget install cabal 3.10.1.0
+# Install x86_64 cabal
+RUN ./ghcup -v --downloader wget install cabal ${CABAL_VERSION}
 
 # Install Bitcoin secp256k1 dependency
 RUN git clone https://github.com/bitcoin-core/secp256k1.git
