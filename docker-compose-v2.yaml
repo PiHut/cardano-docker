@@ -9,9 +9,9 @@ services:
       CNODE_HOSTNAME: 'CHANGE ME'
       PUBLIC_PORT: 3001
     image: cardano_node:latest
-    #command: ["/bin/bash", "-c", "start-relay.sh"]           # Comment for node producer or relay with topology updater
+    command: ["/bin/bash", "-c", "start-relay.sh"]           # Comment for node producer or relay with topology updater
     #command: ["/bin/bash", "-c", "start-with-topology.sh"]  # Uncomment for relay with topology updater
-    command: ["/bin/bash", "-c", "tail","-f","/dev/null"]   # Used for maintenance purpose
+    #command: ["/bin/bash", "-c", "tail","-f","/dev/null"]   # Used for maintenance purpose
     tty: true
     volumes:
       - type: bind
@@ -57,9 +57,9 @@ services:
       CNODE_HOSTNAME: 'CHANGE ME'
       PUBLIC_PORT: 3002
     image: cardano_node:latest
-    #command: ["/bin/bash", "-c", "start-relay.sh"]           # Comment for node producer or relay with topology updater
+    command: ["/bin/bash", "-c", "start-relay.sh"]           # Comment for node producer or relay with topology updater
     #command: ["/bin/bash", "-c", "start-with-topology.sh"]  # Uncomment for relay with topology updater
-    command: ["/bin/bash", "-c", "tail","-f","/dev/null"]   # Used for maintenance purpose
+    #command: ["/bin/bash", "-c", "tail","-f","/dev/null"]   # Used for maintenance purpose
     tty: true
     volumes:
       - type: bind
