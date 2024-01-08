@@ -1,7 +1,7 @@
 FROM cardano_env
 
-LABEL name="cardano_node"
-LABEL description="Cardano node"
+LABEL name="cardano_db-sync"
+LABEL description="Cardano DB Sync Node"
 LABEL maintainer="https://github.com/pascallapointe"
 
 WORKDIR /root
