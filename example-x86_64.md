@@ -1,5 +1,11 @@
-# Build Base image
+# Setup Enviroment Variables
     ARCHITECTURE=x86_64
+    NODE_TAG=8.7.2
+    CLI_PATH=8.17.0.0
+    API_VERSION=8.7.2
+    DB_VERSION=13.1.1.3
+
+# Build Base image
     docker build \
         -t cardano_env:latest \
         ./Dockerfiles/build_env/${ARCHITECTURE}
@@ -14,17 +20,14 @@
         -t cardano_node:${VERSION_NUMBER} Dockerfiles/node
 
 # SubmitAPI image
-    VERSION_NUMBER=8.7.2
-    RELEASE_PATH=8.0.0
     docker build \
         --no-cache \
         --build-arg ARCHITECTURE=${ARCHITECTURE} \
-        --build-arg RELEASE=${VERSION_NUMBER} \
-        --build-arg RELEASE_PATH=${RELEASE_PATH} \
+        --build-arg NODE_TAG=${NODE_TAG} \
+        --build-arg RELEASE_PATH=${API_VERSION} \
         -t cardano_submit:latest Dockerfiles/submit
 
 # DB-Sync image
-    DB_VERSION=13.1.1.3
     docker build \
         --no-cache \
         --build-arg ARCHITECTURE=${ARCHITECTURE} \
