@@ -41,7 +41,7 @@
         -t cardano_db_sync:${DB_VERSION} Dockerfiles/db-sync
 
 # Tag builds as latest
-     docker tag cardano_env:${NODE_TAG} cardano_node:latest
+     docker tag cardano_env:${NODE_TAG} cardano_env:latest
      docker tag cardano_node:${NODE_TAG} cardano_node:latest
-     docker tag cardano_submit:${API_VERSION} cardano_node:latest
-     docker tag cardano_db_sync:${DB_VERSION} cardano_node:latest
+     docker tag cardano_submit:${API_VERSION} cardano_submit:latest
+     docker tag cardano_db_sync:${DB_VERSION} cardano_db_sync:latest
