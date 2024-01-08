@@ -4,7 +4,7 @@ version: "3.7"
 services:
 
   cardano-relay1:
-    container_name: cardano-relay1
+    container_name: relay1
     environment:
       CNODE_HOSTNAME: 'CHANGE ME'
       PUBLIC_PORT: 3001
@@ -52,7 +52,7 @@ services:
           memory: 8G
 
   cardano-relay2:
-    container_name: cardano-relay2
+    container_name: relay2
     environment:
       CNODE_HOSTNAME: 'CHANGE ME'
       PUBLIC_PORT: 3002
@@ -100,7 +100,7 @@ services:
           memory: 8G
 
   cardano-bp:
-    container_name: cardano-bp
+    container_name: bp
     image: cardano_node:latest
     #command: ["/bin/bash", "-c", "start-relay.sh"]           # Comment for node producer or relay with topology updater
     #command: ["/bin/bash", "-c", "start-producer.sh"]       # Uncomment for node producer
@@ -145,7 +145,7 @@ services:
           memory: 8G
 
   cardano-monitor:
-    container_name: cardano-monitor
+    container_name: prometheus
     image: prom/prometheus:latest
     command: ["start-monitoring.sh"]
     volumes:
@@ -168,7 +168,7 @@ services:
         max-file: "10"
 
   cardano-submit:
-    container_name: cardano-submit
+    container_name: submitAPI
     image: cardano_submit:latest
     command: ["/bin/bash", "-c", "start.sh"]
     tty: true
@@ -224,7 +224,7 @@ services:
         max-file: "10"
 
   cardano-postgres:
-    container_name: cardano-postgres
+    container_name: postgres
     image: postgres:11.18-alpine
     environment:
       - POSTGRES_LOGGING=true
