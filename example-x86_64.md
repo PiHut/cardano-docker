@@ -9,18 +9,20 @@
 
 # Build Base image
     docker build \
+        --no-cache \
         --build-arg GHC_VERSION=${GHC_VERSION} \
         --build-arg CABAL_VERSION=${CABAL_VERSION} \
-        -t cardano_env:latest \
+        -t cardano_env:${NODE_TAG} \
         ./Dockerfiles/build_env/${ARCHITECTURE}
 
 # Cardano Node image
     docker build \
+        --no-cache \
         --build-arg ARCHITECTURE=${ARCHITECTURE} \
         --build-arg GHC_VERSION=${GHC_VERSION} \
         --build-arg NODE_TAG=${NODE_TAG} \
         --build-arg CLI_PATH=${CLI_PATH} \
-        -t cardano_node:latest Dockerfiles/node
+        -t cardano_node:${NODE_TAG} Dockerfiles/node
 
 # SubmitAPI image
     docker build \
@@ -29,11 +31,17 @@
         --build-arg NODE_TAG=${NODE_TAG} \
         --build-arg GHC_VERSION=${GHC_VERSION} \
         --build-arg RELEASE_PATH=${API_VERSION} \
-        -t cardano_submit:latest Dockerfiles/submit
+        -t cardano_submit:${API_VERSION} Dockerfiles/submit
 
 # DB-Sync image
     docker build \
         --no-cache \
         --build-arg ARCHITECTURE=${ARCHITECTURE} \
         --build-arg RELEASE=${DB_VERSION} \
-        -t cardano_db_sync:latest Dockerfiles/db-sync
+        -t cardano_db_sync:${DB_VERSION} Dockerfiles/db-sync
+
+# Tag builds as latest
+     docker tag cardano_env:${NODE_TAG} cardano_node:latest
+     docker tag cardano_node:${NODE_TAG} cardano_node:latest
+     docker tag cardano_submit:${API_VERSION} cardano_node:latest
+     docker tag cardano_db_sync:${DB_VERSION} cardano_node:latest
