@@ -17,7 +17,6 @@
 
 # Cardano Node image
     docker build \
-        --no-cache \
         --build-arg ARCHITECTURE=${ARCHITECTURE} \
         --build-arg GHC_VERSION=${GHC_VERSION} \
         --build-arg NODE_TAG=${NODE_TAG} \
@@ -26,7 +25,6 @@
 
 # SubmitAPI image
     docker build \
-        --no-cache \
         --build-arg ARCHITECTURE=${ARCHITECTURE} \
         --build-arg NODE_TAG=${NODE_TAG} \
         --build-arg GHC_VERSION=${GHC_VERSION} \
@@ -35,8 +33,8 @@
 
 # DB-Sync image
     docker build \
-        --no-cache \
         --build-arg ARCHITECTURE=${ARCHITECTURE} \
+        --build-arg GHC_VERSION=${GHC_VERSION} \
         --build-arg RELEASE=${DB_VERSION} \
         -t cardano_db_sync:${DB_VERSION} Dockerfiles/db-sync
 
