@@ -4,7 +4,7 @@
     CABAL_VERSION=3.8.1.0
     NODE_TAG=8.7.2
     CLI_PATH=8.17.0.0
-    API_VERSION=8.7.2
+    API_VERSION=3.2.1
     DB_VERSION=13.1.1.3
 
 # Build Base image
@@ -30,7 +30,7 @@
         --build-arg ARCHITECTURE=${ARCHITECTURE} \
         --build-arg NODE_TAG=${NODE_TAG} \
         --build-arg GHC_VERSION=${GHC_VERSION} \
-        --build-arg RELEASE_PATH=${API_VERSION} \
+        --build-arg API_VERSION=${API_VERSION} \
         -t cardano_submit:${API_VERSION} Dockerfiles/submit
 
 # DB-Sync image
