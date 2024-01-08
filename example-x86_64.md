@@ -18,7 +18,6 @@
     docker build \
         --build-arg ARCHITECTURE=${ARCHITECTURE} \
         --build-arg GHC_VERSION=${GHC_VERSION} \
-        --build-arg CABAL_VERSION=${CABAL_VERSION} \
         --build-arg NODE_TAG=${NODE_TAG} \
         --build-arg CLI_PATH=${CLI_PATH} \
         -t cardano_node:latest Dockerfiles/node
@@ -28,6 +27,7 @@
         --no-cache \
         --build-arg ARCHITECTURE=${ARCHITECTURE} \
         --build-arg NODE_TAG=${NODE_TAG} \
+        --build-arg GHC_VERSION=${GHC_VERSION} \
         --build-arg RELEASE_PATH=${API_VERSION} \
         -t cardano_submit:latest Dockerfiles/submit
 
