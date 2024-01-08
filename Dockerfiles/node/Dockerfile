@@ -24,13 +24,13 @@ RUN cabal build cardano-node cardano-cli
 
 # Create files structure
 RUN mkdir -p /cardano/config /cardano/bin /cardano/db /cardano/socket /cardano/scripts
-ARG GHC_VERSION=ghc-9.6.3
+ARG GHC_VERSION
 ARG NODE_PATH=$NODE_TAG
 ARG CLI_PATH
 #WORKDIR /root/cardano-node
-RUN cp -p dist-newstyle/build/${ARCHITECTURE}-linux/${GHC_VERSION}/cardano-node-${NODE_PATH}/x/cardano-node/build/cardano-node/cardano-node /cardano/bin
+RUN cp -p dist-newstyle/build/${ARCHITECTURE}-linux/ghc-${GHC_VERSION}/cardano-node-${NODE_PATH}/x/cardano-node/build/cardano-node/cardano-node /cardano/bin
 #WORKDIR /root/cardano-cli
-RUN cp -p dist-newstyle/build/${ARCHITECTURE}-linux/${GHC_VERSION}/cardano-cli-${CLI_PATH}/x/cardano-cli/build/cardano-cli/cardano-cli /cardano/bin
+RUN cp -p dist-newstyle/build/${ARCHITECTURE}-linux/ghc-${GHC_VERSION}/cardano-cli-${CLI_PATH}/x/cardano-cli/build/cardano-cli/cardano-cli /cardano/bin
 
 # Add startup scripts
 COPY files/start-relay.sh /cardano/scripts/start-relay.sh
