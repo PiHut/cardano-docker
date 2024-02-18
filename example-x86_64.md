@@ -1,8 +1,8 @@
 # Setup Enviroment Variables
     ARCHITECTURE=x86_64
-    GHC_VERSION=8.10.7
-    CABAL_VERSION=3.8.1.0
-    NODE_TAG=8.7.2
+    GHC_VERSION=9.6.4
+    CABAL_VERSION=3.10.1.0
+    NODE_TAG=8.7.3
     CLI_PATH=8.17.0.0
     API_VERSION=3.2.1
     DB_VERSION=13.1.1.3
