@@ -17,7 +17,7 @@ _term() {
 trap _term SIGTERM SIGINT
 
 echo "Starting Cardano Relay Node ..."
-cardano-node run +RTS -maxN4 -RTS -N2 --disable-delayed-os-memory-return -I0.3 -Iw600 -A16m -F1.5 -H2500M -T -S --topology ${TOPOLOGY} --database-path ${DB_PATH} --socket-path ${SOCKET_PATH} --host-addr ${HOSTADDR} --port ${PORT} --config ${CONFIG} &
+cardano-node run +RTS -maxN4 -RTS --topology ${TOPOLOGY} --database-path ${DB_PATH} --socket-path ${SOCKET_PATH} --host-addr ${HOSTADDR} --port ${PORT} --config ${CONFIG} &
 
 PID=$!
 wait $PID
