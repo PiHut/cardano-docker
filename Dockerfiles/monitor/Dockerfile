@@ -9,31 +9,21 @@ WORKDIR /cardano
 RUN apt-get update
 RUN apt-get install -y wget
 
-ARG ARCHITECTURE
-
-# Set architecture-specific variables
-RUN if [ "$ARCHITECTURE" = "x86_64" ]; then \
-    ARCH=amd64 \
-    ; elif [ "$ARCHITECTURE" = "aarch64" ]; then \
-    ARCH=arm64 \
-    ; fi
-
-# Define version numbers for different architectures
-ARG PROM_VER=2.45.3
-ARG NEXP_VER=1.7.0
-
 # Define arguments/variables
+ARG ARCHITECTURE
+ARG PROM_VER=2.45.3
 ARG PROM_DIR="prometheus"
-ARG PROM_FILE="prometheus-${PROM_VER}.linux-${ARCH}.tar.gz"
-ARG PROM_URL="https://github.com/prometheus/prometheus/releases/download/v${PROM_VER}/${PROM_FILE}"
-
+ARG NEXP_VER=1.7.0
 ARG NEXP_DIR="node_exporter"
-ARG NEXP_FILE="node_exporter-${NEXP_VER}.linux-${ARCH}.tar.gz"
-ARG NEXP_URL="https://github.com/prometheus/node_exporter/releases/download/v${NEXP_VER}/${NEXP_FILE}"
 
 # Download all libraries
-RUN wget ${PROM_URL}
-RUN wget ${NEXP_URL}
+RUN if [ "$ARCHITECTURE" = "x86_64" ]; then \
+    wget "https://github.com/prometheus/prometheus/releases/download/v${PROM_VER}/prometheus-${PROM_VER}.linux-amd64.tar.gz" \
+    wget "https://github.com/prometheus/node_exporter/releases/download/v${NEXP_VER}/node_exporter-${NEXP_VER}.linux-amd64.tar.gz" \
+    ; elif [ "$ARCHITECTURE" = "aarch64" ]; then \
+    wget "https://github.com/prometheus/prometheus/releases/download/v${PROM_VER}/prometheus-${PROM_VER}.linux-arm64.tar.gz" \
+    wget "https://github.com/prometheus/node_exporter/releases/download/v${NEXP_VER}/node_exporter-${NEXP_VER}.linux-arm64.tar.gz" \
+    ; fi
 
 # Extract files
 RUN mkdir ${PROM_DIR}
