@@ -9,14 +9,27 @@ WORKDIR /cardano
 RUN apt-get update
 RUN apt-get install -y wget
 
+ARG ARCHITECTURE
+
+# Set architecture-specific variables
+RUN if [ "$ARCHITECTURE" = "x86_64" ]; then \
+    ARCH=amd64 \
+    ; elif [ "$ARCHITECTURE" = "aarch64" ]; then \
+    ARCH=arm64 \
+    ; fi
+
+# Define version numbers for different architectures
+ARG PROM_VER=2.45.3
+ARG NEXP_VER=1.7.0
+
 # Define arguments/variables
 ARG PROM_DIR="prometheus"
-ARG PROM_FILE="prometheus-2.45.3.linux-arm64.tar.gz"
-ARG PROM_URL="https://github.com/prometheus/prometheus/releases/download/v2.5.3/${PROM_FILE}"
+ARG PROM_FILE="prometheus-${PROM_VER}.linux-${ARCH}.tar.gz"
+ARG PROM_URL="https://github.com/prometheus/prometheus/releases/download/v${PROM_VER}/${PROM_FILE}"
 
 ARG NEXP_DIR="node_exporter"
-ARG NEXP_FILE="node_exporter-1.0.1.linux-arm64.tar.gz"
-ARG NEXP_URL="https://github.com/prometheus/node_exporter/releases/download/v1.0.1/${NEXP_FILE}"
+ARG NEXP_FILE="node_exporter-${NEXP_VER}.linux-${ARCH}.tar.gz"
+ARG NEXP_URL="https://github.com/prometheus/node_exporter/releases/download/v${NEXP_VER}/${NEXP_FILE}"
 
 # Download all libraries
 RUN wget ${PROM_URL}
